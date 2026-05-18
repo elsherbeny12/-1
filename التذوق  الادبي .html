@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاضرات التذوق الأدبي</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a4a6b;
+    --primary-light: #2a6496;
+    --accent: #c8963e;
+    --accent-light: #e8b86d;
+    --bg: #f4f0e8;
+    --bg-card: #fffdf7;
+    --text: #1e1e1e;
+    --text-muted: #5a5a5a;
+    --border: #d4c9a8;
+    --success: #2e7d5e;
+    --shadow: 0 4px 24px rgba(26,74,107,0.10);
+    --radius: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 10% 10%, rgba(200,150,62,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse at 90% 90%, rgba(26,74,107,0.07) 0%, transparent 60%);
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    padding: 28px 40px 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(26,74,107,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(200,150,62,0.12);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -40px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  header h1 {
+    font-family: 'Amiri', serif;
+    font-size: 2.2rem;
+    color: #fff;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+  }
+  header p {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.95rem;
+    margin-top: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .header-accent {
+    display: inline-block;
+    width: 60px; height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 10px auto 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    background: var(--bg-card);
+    border-bottom: 2px solid var(--border);
+    padding: 14px 40px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  .nav-btn {
+    background: transparent;
+    border: 2px solid var(--border);
+    border-radius: 50px;
+    padding: 8px 0;
+    width: 130px;
+    text-align: center;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+  .nav-btn:hover {
+    border-color: var(--primary-light);
+    color: var(--primary);
+    background: rgba(26,74,107,0.05);
+    transform: translateY(-2px);
+  }
+  .nav-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(26,74,107,0.3);
+    transform: translateY(-2px);
+  }
+  /* ===== MAIN CONTENT ===== */
+  main {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 0 24px 60px;
+  }
+
+  .lecture-section { display: none; }
+  .lecture-section.active {
+    display: block;
+    animation: fadeSlide 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(28px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* ===== LECTURE HEADER CARD ===== */
+  .lecture-title-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    border-radius: var(--radius);
+    padding: 30px 36px;
+    margin-bottom: 32px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .lecture-title-card::after {
+    content: '';
+    position: absolute;
+    left: -30px; bottom: -30px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .lecture-num {
+    font-family: 'Amiri', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    line-height: 1;
+    min-width: 60px;
+    text-align: center;
+  }
+  .lecture-title-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .lecture-title-card p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 4px;
+  }
+
+  /* ===== CONTENT CARDS ===== */
+  .card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 22px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 6px 30px rgba(26,74,107,0.13); }
+
+  .card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title .icon {
+    width: 32px; height: 32px;
+    background: rgba(26,74,107,0.1);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .card p {
+    line-height: 1.9;
+    color: var(--text);
+    font-size: 0.97rem;
+    margin-bottom: 10px;
+  }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* ===== LISTS ===== */
+  ul.styled-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.styled-list li {
+    padding: 9px 20px 9px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 0.96rem;
+    line-height: 1.8;
+    color: var(--text);
+    position: relative;
+  }
+  ul.styled-list li:last-child { border-bottom: none; }
+  ul.styled-list li::before {
+    content: '◆';
+    position: absolute;
+    right: 0;
+    color: var(--accent);
+    font-size: 0.6rem;
+    top: 14px;
+  }
+
+  ul.sub-list {
+    list-style: none;
+    padding-right: 20px;
+    margin-top: 8px;
+  }
+  ul.sub-list li {
+    padding: 5px 16px;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    position: relative;
+    line-height: 1.7;
+  }
+  ul.sub-list li::before {
+    content: '–';
+    position: absolute;
+    right: 0;
+    color: var(--primary-light);
+  }
+
+  /* ===== BADGE LABELS ===== */
+  .label {
+    display: inline-block;
+    background: rgba(26,74,107,0.1);
+    color: var(--primary);
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .label.accent {
+    background: rgba(200,150,62,0.15);
+    color: #9a6e20;
+  }
+
+  /* ===== HIGHLIGHT BOX ===== */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(26,74,107,0.06), rgba(200,150,62,0.06));
+    border-right: 4px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 14px 0;
+    font-style: italic;
+    font-family: 'Amiri', serif;
+    font-size: 1.05rem;
+    line-height: 2;
+    color: var(--primary);
+  }
+
+  /* ===== POETRY BOX ===== */
+  .poetry-box {
+    background: linear-gradient(135deg, #fffbf0, #fff8e8);
+    border: 1px solid var(--accent-light);
+    border-radius: 10px;
+    padding: 20px 28px;
+    margin: 14px 0;
+    text-align: center;
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    line-height: 2.4;
+    color: #5a3800;
+    box-shadow: inset 0 0 20px rgba(200,150,62,0.05);
+  }
+
+  /* ===== TABLE ===== */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    margin-top: 10px;
+  }
+  .styled-table th {
+    background: var(--primary);
+    color: #fff;
+    padding: 12px 16px;
+    text-align: right;
+    font-weight: 600;
+  }
+  .styled-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.7;
+  }
+  .styled-table tr:nth-child(even) td { background: rgba(26,74,107,0.03); }
+  .styled-table tr:hover td { background: rgba(200,150,62,0.06); }
+  /* ===== GRID 2-COL ===== */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 10px;
+  }
+  .mini-card {
+    background: rgba(26,74,107,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+  }
+  .mini-card h4 {
+    font-size: 0.95rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .mini-card p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 680px) {
+    header { padding: 20px 16px 16px; }
+    header h1 { font-size: 1.5rem; }
+    nav { padding: 10px 12px; gap: 7px; }
+    .nav-btn { padding: 7px 13px; font-size: 0.8rem; }
+    main { padding: 0 12px 40px; margin-top: 24px; }
+    .card { padding: 20px 18px; }
+    .lecture-title-card { padding: 20px 18px; flex-direction: column; gap: 10px; }
+    .lecture-num { font-size: 2.5rem; }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📚 محاضرات التذوق الأدبي</h1>
+  <p>جامعة المنصورة الجديدة - new mansora university </p>
+  <div class="header-accent"></div>
+</header>
+
+<nav id="mainNav">
+  <button class="nav-btn active" onclick="showLecture(1, this)">① المحاضرة الأولى</button>
+  <button class="nav-btn" onclick="showLecture(2, this)">② المحاضرة الثانية</button>
+  <button class="nav-btn" onclick="showLecture(3, this)">③ المحاضرة الثالثة</button>
+  <button class="nav-btn" onclick="showLecture(4, this)">④ المحاضرة الرابعة</button>
+  <button class="nav-btn" onclick="showLecture(5, this)">⑤ المحاضرة الخامسة</button>
+  <button class="nav-btn placeholder-btn" onclick="showLecture(6, this)">⑥ المحاضرة السادسة</button>
+  <button class="nav-btn placeholder-btn" onclick="showLecture(7, this)">⑦ المحاضرة السابعة</button>
+  <button class="nav-btn placeholder-btn" onclick="showLecture(8, this)">⑧ المحاضرة الثامنة</button>
+</nav>
+
+<main>
+
+<!-- ========================================
+     LECTURE 1
+======================================== -->
+<section id="lecture-1" class="lecture-section active">
+  <div class="lecture-title-card">
+    <div class="lecture-num">١</div>
+    <div>
+      <h2>مفهوم التذوق الأدبي</h2>
+      <p>التعريف اللغوي والاصطلاحي — الأهمية — العناصر — المصادر — الأقسام</p>
+    </div>
+  </div>
+
+  <!-- التعريف اللغوي -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📖</span> أولاً: التعريف اللغوي للتذوق</div>
+    <ul class="styled-list">
+      <li>في <strong>القاموس المحيط</strong>: ذاقه ذوقًا وذوقانًا ومذاقةً أي اختبر طعمه، وتذوّقه أي ذاقه مرةً بعد مرة.</li>
+      <li>في <strong>المنجد</strong>: الذوق ملكة تُدرك بها الطعوم، والذوق الطبع — يُقال: هو حسن الذوق للشعر أي مطبوع عليه.</li>
+      <li>عند <strong>ابن خلدون</strong> في مقدمته: الذوق ملكة بلاغية للسان، استُعير لها هذا الاسم لأن محلّها في اللسان من حيث النطق بالكلام، كما أن الطعوم محسوسة له.</li>
+      <li>في <strong>المعنى الحسي الأول</strong>: معالجة الأشياء باللسان لتعرّف طعمها ← حلاوة أو ملوحة أو مرارة أو حموضة ← نفور أو اطمئنان.</li>
+      <li>ثم <strong>انتقلت الكلمة</strong> إلى معالجة الأشياء بالنفس لتعرّف خواصها الجميلة: حسن الألوان، جمال الألفاظ، روعة الأنغام، فدخلت دائرة الفنون الجميلة.</li>
+    </ul>
+  </div>
+
+  <!-- التعريف الاصطلاحي -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🎯</span> ثانياً: التعريف الاصطلاحي للتذوق</div>
+    <p>تعددت التعريفات وتمحورت حول أربعة محاور رئيسية:</p>
+    <table class="styled-table" style="margin-top:14px;">
+      <tr><th>#</th><th>المحور</th><th>المضمون</th></tr>
+      <tr><td>أ</td><td>ملكة فنية</td><td>حاسة أو ملكة يتمتع بها أصحاب الفطرة السليمة</td></tr>
+      <tr><td>ب</td><td>فهم متكامل</td><td>الفهم الدقيق المتكامل لعناصر النص الأدبي</td></tr>
+      <tr><td>ج</td><td>استجابة وجدانية</td><td>استجابة وجدانية تُحسن الحكم على النص الأدبي بعد فهمه</td></tr>
+      <tr><td>د</td><td>تقدير سليم</td><td>تقدير العمل الأدبي تقديرًا سليمًا</td></tr>
+    </table>
+    <div class="highlight-box">
+      الخلاصة: الذوق (التذوق) هو ملكة يُقدَّر بها الأثر الفني، أو هو الاستعداد الفطري أو المكتسب الذي نستطيع به تقدير الجمال والاستمتاع به ومحاكاته بقدر ما نستطيع في أعمالنا وأقوالنا وأفكارنا.
+    </div>
+  </div>
+
+  <!-- بدايات التذوق -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🏛️</span> ثالثاً: بدايات التذوق الأدبي في التراث العربي</div>
+    <ul class="styled-list">
+      <li>بدأ التذوق في الأدب العربي متزامنًا مع ظهور الأدب، إذ كان يحمل معنى النقد والتقييم.</li>
+      <li>في <strong>العصر الجاهلي</strong>: اعتمد على الفطرة السليمة والذوق الخاص/العام دون معايير نقدية محددة.</li>
+      <li><strong>مثال (الصورة الأولى)</strong>: قول المتلمّس في وصف بعيره: "وقد أتناسى الهمّ عند احتضاره بناجٍ عليه الصيعريةُ مُكدِم"، فقال طرفة بن العبد: "استنوق الجمل!" لأن الصيعرية سمةٌ في عنق الناقة لا البعير.</li>
+      <li><strong>مثال (الصورة الثانية)</strong>: الشاعر النابغة الذبياني في سوق عكاظ حين قال لحسان بن ثابت: "إنك لشاعر" لكنه انتقد تفصيلات قصيدته (قلّة الجِفان، يلمعن في الضحى، يقطرن دمًا…) ودلّ على الأبلغ في كل موضع.</li>
+      <li><strong>مثال (بدايات الإسلام)</strong>: وصف الوليد بن المغيرة للقرآن الكريم: "إن لقوله لحلاوة، وإن عليه لطلاوة، وإن أعلاه لمثمر، وإن أسفله لمغدق، وإنه ليعلو ولا يُعلى".</li>
+    </ul>
+  </div>
+
+  <!-- الأهمية -->
+  <div class="card">
+    <div class="card-title"><span class="icon">⭐</span> رابعاً: أهمية التذوق الأدبي</div>
+    <ul class="styled-list">
+      <li>تسعى الأمم في العصر الحديث إلى تنمية الذوق باعتباره عنوانًا للرُّقي والتقدم.</li>
+      <li>المقاييس العمرانية والصناعية لا تبتعد عن الذوق، بل الذوق عامل أساسي فيها.</li>
+      <li>التذوق الصحيح للأدب يقود إلى غايته المنشودة: تهذيب الشعور والأخلاق وتنقية النفس.</li>
+      <li>تنمية الذوق هي الغاية الأولى في تدريس الأدب.</li>
+      <li>للمبدع: الذوق أهمية قصوى بوصفه أول المتذوّقين لعمله.</li>
+      <li>للمتلقي: تذوق النص يُدرك الغاية منه، وصاحب الذوق السليم يستطيع تقدير الآثار وإدراك ما في الكون من تناسق وجمال.</li>
+    </ul>
+  </div>
+
+  <!-- عناصر الذوق -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🔬</span> خامساً: عناصر التذوق الأدبي</div>
+    <p>الذوق ليس ملكة بسيطة، بل هو مزيج من ثلاثة عناصر:</p>
+    <div class="grid-2" style="margin-top:14px;">
+      <div class="mini-card">
+        <h4>🧠 العقل (الفكر)</h4>
+        <p>من غلب عليه عنصر الفكر آثر شعراء المعاني كأبي تمام وابن الرومي والمتنبي والمعري، وفضّل كتّاب الثقافة كالجاحظ وابن خلدون.</p>
+      </div>
+      <div class="mini-card">
+        <h4>❤️ العاطفة</h4>
+        <p>من غلبت عليه العاطفة فُتن بشعراء النسيب والحماسة والعتاب، وبالخطباء والوصّافين.</p>
+      </div>
+      <div class="mini-card" style="grid-column:1/-1;">
+        <h4>🎵 الحس</h4>
+        <p>من كان شديد الحس فضّل أسلوب البحتري وشوقي كما يفضل الموسيقى والرسم الجميل. والعاطفة ربما كانت أهم العناصر وأوسعها سلطانًا.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- مصادر الذوق -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🌱</span> سادساً: مصادر التذوق الأدبي</div>
+    <ul class="styled-list">
+      <li><strong>الهبة الطبيعية:</strong> تولد مع الإنسان وتظهر في ميل الناشئ الموهوب منذ الطفولة إلى كل جميل من الأدب والفن.</li>
+      <li><strong>التهذيب والتعليم:</strong> الدرس ينمي الذوق ويهذبه ويسمو به؛ الأديب ذو الفطرة الذوّاقة يستفيد من القراءة وممارسة الفنون فيصبح مصقول الذوق، يضع يده على العبارة البليغة والخيال الجميل.</li>
+    </ul>
+  </div>
+
+  <!-- أقسام الذوق -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📊</span> سابعاً: أقسام الذوق</div>
+
+    <p style="font-weight:700; color:var(--primary); margin-bottom:10px;">من الناحية الأولى: سليم وسقيم</p>
+    <ul class="styled-list">
+      <li><strong>الذوق السليم (الحسن/الصحيح):</strong> يُميّز بين الأدب العالي الجميل والأدب المتكلّف السخيف. وصفه صاحب الوساطة: "الذوق المهذَّب الذي صقلَه الأدب، وشحذَته الرواية، وجلّته الفطنة، وألهم الفصل بين الرديء والجيد."</li>
+      <li><strong>الذوق السقيم (الرديء/الفاسد):</strong> لا يُحسن التفرقة بين أنواع الأدب من حيث القيمة الفنية، أو يؤثر السخيف المطرح.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 10px;">من الناحية الثانية: سلبي وإيجابي</p>
+    <ul class="styled-list">
+      <li><strong>الذوق السلبي:</strong> يُدرك الجمال ويتذوّقه لكنه عاجز عن تفسير ما يُدرك أو تعليله. صاحبه يظفر بالمتعة الأدبية ويقنع بها.</li>
+      <li><strong>الذوق الإيجابي:</strong> يُدرك الجمال ويُميّزه عن القبح ثم يُعبّر عن ذلك مبيّنًا مواطنه ومعلّلًا كل صفة أدبية.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 10px;">من الناحية الثالثة: عام وخاص</p>
+    <ul class="styled-list">
+      <li><strong>الذوق العام:</strong> ما يشترك فيه أبناء الجيل الواحد في البيئة الواحدة لتأثرهم بظروف مشتركة. مثال: المصريون يشتركون في الإعجاب بالآثار الفنية.</li>
+      <li><strong>الذوق الخاص:</strong> ذوق جماعة خاصة لخصوصية البيئة أو الثقافة أو الشخصية. مثال: ذوق الأزهريين يختلف عن ذوق الجامعيين الذين بدورهم يتأثر بعضهم بالذوق الإنجليزي وبعضهم بالفرنسي.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================================
+     LECTURE 2
+======================================== -->
+<section id="lecture-2" class="lecture-section">
+  <div class="lecture-title-card">
+    <div class="lecture-num">٢</div>
+    <div>
+      <h2>العوامل المؤثرة في الذوق + نص زهير بن أبي سلمى</h2>
+      <p>البيئة — الزمان — الجنس — التربية — الفروق الفردية — تحليل المعلقة</p>
+    </div>
+  </div>
+
+  <!-- العوامل -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🌍</span> أولاً: العوامل المؤثرة في الذوق</div>
+
+    <p style="font-weight:700; color:var(--primary); margin-bottom:8px;">١. البيئة</p>
+    <ul class="styled-list">
+      <li>مجموعة العوامل الطبيعية والاجتماعية التي تميّز حيًا جغرافيًا عن غيره.</li>
+      <li>أبناء البادية ≠ أبناء المدينة، وأبناء الساحل ≠ أبناء البيئة الجبلية.</li>
+      <li>البادية: خشونة واضطراب وبساطة وحرية ← تختلف عن المدن (الترف والتصنّع).</li>
+      <li><strong>مثال علي بن الجهم:</strong> جاء من البادية فمدح المتوكل بتشبيهات بدوية (الكلب، التيس، الدلو). أمره الخليفة بالإقامة في بغداد والاطلاع على حضارتها، فعاد بشعر رقيق عذب.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">٢. الزمان</p>
+    <ul class="styled-list">
+      <li>الذوق حلقة تاريخية تعكس الجهود الثقافية والحضارية لعصر من العصور.</li>
+      <li>تحوّلت مفاهيم الأدب من الجاهلية → الإسلام → الأموي → العباسي → الحديث.</li>
+      <li>أبو نواس سخر من الوقوف على الأطلال بعد أن كانت سمة جاهلية.</li>
+      <li>ظهر الأصمعي يقدّم بشّارًا على مروان بن أبي حفصة لتجديد بشّار وسعة بديعه.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">٣. الجنس</p>
+    <ul class="styled-list">
+      <li>عامل مركّب من البيئة والزمان: جماعة سكنت مكانًا وخضعت لعوامله عهودًا طويلة.</li>
+      <li>الذوق الفارسي ظهر في: بشّار وأبي نواس وابن المقفّع.</li>
+      <li>الذوق الرومي ظهر عند ابن الرومي في تسلسله واستقصائه وطول نفسه.</li>
+      <li>الذوق المصري عند البهاء زهير: يُسمع كأنك تسمع الشعب المصري يتحدث.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">٤. التربية</p>
+    <ul class="styled-list">
+      <li>جملة المبادئ والقيم التي تؤمن بها مجموعة وتتخذها منهجًا وتلتزم بتنفيذه.</li>
+      <li>حصيلة جهود: الأهل + المدارس + المؤسسات الإعلامية والتعليمية.</li>
+      <li>الأذن التي نمت في عصر العمالقة لن تستسيغ أذن المحطات الفضائية.</li>
+      <li>مثال ابن الرومي: فضّل وصف الرقاقة على وصف الهلال لابن المعتز لأنه من بيئته ويصف ما يعرف.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">٥. الفروق الفردية (المزاج الخاص)</p>
+    <ul class="styled-list">
+      <li>من أهم العوامل المؤثرة. أمزجة البشر خاضعة للتغيرات الكيميائية في الدماغ.</li>
+      <li>المتشائم ≠ المتفائل في أحكامه وأذواقه.</li>
+      <li><strong>ابن الرومي (متشائم):</strong> خلع على الدنيا مزاجه الحزين وأبكى الطفل حين الولادة من كوارثها.</li>
+      <li><strong>البحتري (متفائل):</strong> خلع على الربيع بهجة نفسه فشاعت فيه الحياة والجمال.</li>
+    </ul>
+    <div class="highlight-box">
+      "بالذوق نرتقي وبالذوق تتحقق إنسانيتنا ويتحدد موقعنا في خارطة الحضارة العالمية" — ابن سلّام
+    </div>
+  </div>
+
+  <!-- نص زهير -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📜</span> ثانياً: نص للتذوق — زهير بن أبي سلمى الجاهلي</div>
+
+    <p style="font-weight:700; color:var(--primary); margin-bottom:8px;">مقدمة عن الشاعر</p>
+    <ul class="styled-list">
+      <li>زهير بن ربيعة بن رياح، من مزينة قبيلة مضر، يُنسب إلى كنية أبيه (أبي لُمى).</li>
+      <li>من شعراء الطبقة الأولى الجاهليين، ويُلقَّب بحكيم الشعراء.</li>
+      <li>عُرف بالشعر: أبوه وخاله وأختاه وابناه كعب وجبير.</li>
+      <li>كان عمر بن الخطاب يُقدّمه لسهولة شعره وصدقه وعدم مدحه الرجل إلا بما يكون في الرجال.</li>
+      <li>يمتاز شعره بمتانة الألفاظ والسهولة والإيجاز.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">جو القصيدة ومناسبتها</p>
+    <ul class="styled-list">
+      <li>نشأت من حرب داحس والغبراء بين قبيلتي عبس وذبيان.</li>
+      <li>تراهنا على تسابق فرسين: داحس والغبراء (العشرون بعيرًا للسابق).</li>
+      <li>سبقت الغبراء لكن أصحاب داحس اعترضوها فتنازعا، فثارت الحرب.</li>
+      <li>تدخّل هرم بن سناف والحارث بن عوف فأصلحا وتحمّلا ديات القتلى.</li>
+      <li>أنشأ زهير معلقته يمدح هذين الرجلين ويدعو إلى السلام ونبذ الحرب.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">الأبيات (1-4) ومعانيها</p>
+    <div class="poetry-box">
+      تَشِهَدُ فأقسمُ بالبيتِ الذي طافَ حولَه رجالٌ بَنَوه<br>
+      يمينًا ما أجدتُما والسيدانِ مِن على كلِّ حالِ<br>
+      وتداركتما بعدما فانوا عبسًا وذبيانَ بينهم طلٌّ وقد دقُّوا<br>
+      وقد قلتما إن نُدرِك ولم يكن لَلسلمِ ومَعقولٌ من القول نَسلَم
+    </div>
+    <ul class="styled-list">
+      <li><strong>البيت 1:</strong> يقسم الشاعر بالكعبة — إشارة إلى عقيدته التوحيدية وديانته الحنفية.</li>
+      <li><strong>البيت 2:</strong> يقسم بأن الحارث وهرم أفضل الرجاؤل في الشدة والرخاء.</li>
+      <li><strong>البيت 3:</strong> تداركتما القبيلتين بعد استحكام العداء.</li>
+      <li><strong>البيت 4:</strong> عجب الشاعر مما ألزم به هذان السيدان أنفسهما من الصلح.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">الأساليب البلاغية والأدبية (الأبيات 1-4)</p>
+    <ul class="styled-list">
+      <li><strong>الالتفات:</strong> الانتقال من الغائب إلى المتكلم إلى الخطاب (أقسمُ، بنوه، جددتُما، تداركتما).</li>
+      <li><strong>الكناية:</strong> "من سحيل ومبرم" — كناية عن حالتي الرخاء والشدة.</li>
+      <li><strong>حذف الفاعل:</strong> في "جددتُماه" للعلم به.</li>
+      <li><strong>الكناية عن صفة:</strong> "دقّوا بينهم عطر منشم" — كناية عن الحرب المدمّرة.</li>
+      <li><strong>الجناس غير التام:</strong> في "تضرم وتضرم".</li>
+      <li><strong>التوكيد اللغوي:</strong> "لَنِعم" — لام التوكيد لبيان فضل الممدوحَين.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================================
+     LECTURE 3
+======================================== -->
+<section id="lecture-3" class="lecture-section">
+  <div class="lecture-title-card">
+    <div class="lecture-num">٣</div>
+    <div>
+      <h2>مقومات التذوق الأدبي للنص</h2>
+      <p>الفكرية — العاطفية — الخيالية — الفنية + تحليل أبيات المعلقة (5-10)</p>
+    </div>
+  </div>
+
+  <!-- المقومات الفكرية -->
+  <div class="card">
+    <div class="card-title"><span class="icon">💡</span> أولاً: المقومات الفكرية</div>
+    <ul class="styled-list">
+      <li>تتمثل في العنصر العقلي في النص وطبيعة فكر الشاعر وثقافته.</li>
+      <li>تحليل الفكرة وتذوّق الأفكار في النص يكون بـ:
+        <ul class="sub-list">
+          <li>البحث عن مدى صحة الفكرة.</li>
+          <li>دراسة تأثيرها في المتلقي (عصرية مبتكرة / قديمة / رمزية / مباشرة).</li>
+          <li>تحديد الفكرة المحورية والأفكار الجزئية والمعاني الضمنية.</li>
+        </ul>
+      </li>
+    </ul>
+    <p style="font-weight:700; color:var(--primary); margin:12px 0 8px;">مقاييس جمال الأفكار في العمل الأدبي:</p>
+    <ul class="styled-list">
+      <li>أن تكون الأفكار راقية سامية.</li>
+      <li>أن تتسم بالجدّة والابتكار.</li>
+      <li>أن تتصف بالترابط.</li>
+      <li>أن تتصف بالعمق.</li>
+      <li>أن تتصف بالصدق الفني الأدبي (لا الصدق العلمي)؛ فقد يكون الأديب مخالفًا للحقيقة لكنه صادق في نقل خلجات وجدانه بشرط ألا تكون منافية للحقائق الكونية.</li>
+    </ul>
+    <div class="highlight-box">
+      ملاحظة: الفكرة في الشعر ليست حاسمة كالعنصر العاطفي، بينما هي أكثر أهمية في النثر (المسرح، القصة، الرواية).
+    </div>
+  </div>
+
+  <!-- المقومات العاطفية -->
+  <div class="card">
+    <div class="card-title"><span class="icon">❤️</span> ثانياً: المقومات العاطفية</div>
+    <p>العاطفة محور ارتكاز النص الأدبي: جملة من الانفعالات المجتمعة نحو شيء واحد أو موضوع ما (سلبًا وإيجابًا).</p>
+    <p style="font-weight:700; color:var(--primary); margin:12px 0 8px;">مقاييس العاطفة في العمل الأدبي:</p>
+    <ul class="styled-list">
+      <li><strong>صدق العاطفة أو صحتها:</strong> قدرة العاطفة على جعل العمل مؤثرًا ومعبّرًا دقيقًا عن نفسية صاحبه.</li>
+      <li><strong>سمو العاطفة أو درجتها:</strong> تتجلى في العاطفة النبيلة الراقية التي ترقى بالوجدان وتثير انفعالًا قويًا يدفعه لحب الحياة والحق والخير والجمال.</li>
+      <li><strong>قوة العاطفة أو روعتها:</strong> ما أضافه العمل الأدبي من إحساس وما أيقظه فينا من شعور فجعلنا نحس الحياة كما أحسّها الأديب وتذوّقها بعمق.</li>
+    </ul>
+  </div>
+
+  <!-- المقومات الخيالية -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🌈</span> ثالثاً: المقومات الخيالية</div>
+    <p style="font-weight:700; color:var(--primary); margin-bottom:12px;">أنواع الخيال الثلاثة:</p>
+    <ul class="styled-list">
+      <li><strong>الخيال الابتكاري:</strong> يؤلف صورًا حسية جديدة عناصرها موجودة في ذاكرة الأديب، لا يقدّم الواقع الخارجي كما هو بل على شكل جديد. أكثر ما يوجد في الشعر والقصص والروايات والمسرحيات.</li>
+      <li><strong>الخيال التأليفي:</strong> يربط بين الأشياء المتشابهة إذا كان يضمّها إطار عاطفي واحد أو حالة نفسية متماثلة (كأن يرى الشمس تشرق وتغرب فيستدعي ذلك صورة انقضاء العمر).</li>
+      <li><strong>الخيال البياني أو التفسيري:</strong> لا يعنى بوصف الأشياء الخارجية وإنما يحاول تفسيرها (كأن يجسّد الشاعر الطبيعة إنسانًا أو يمثّلها فتاة حسناء). هذا النوع هو الغالب في أدبنا العربي.</li>
+    </ul>
+  </div>
+
+  <!-- المقومات الفنية -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🎨</span> رابعاً: المقومات الفنية</div>
+    <p>يُقصد بها الجانب المادي في النص والقالب الذي يحتوي الأفكار والعواطف والخيالات، وتتمثل في:</p>
+
+    <table class="styled-table" style="margin-top:12px;">
+      <tr><th>المقوّم</th><th>التعريف والتفاصيل</th></tr>
+      <tr>
+        <td><strong>الألفاظ</strong></td>
+        <td>رموز المعاني ومادة التصوير، أساس بنية النص. تذوّقها يكون بدراسة: قوّتها الأدبية، دلالاتها، تفرّدها، صياغتها، مخارجها، ألفتها، عذوبتها، بُعدها عن الابتذال.</td>
+      </tr>
+      <tr>
+        <td><strong>التراكيب</strong></td>
+        <td>اجتماع الألفاظ لإفادة المعنى. يجب أن تكون الألفاظ سليمة من العيوب (التعقيد المعنوي واللفظي، المعاظلة، الحشو اللفظي، الابتذال، الخطأ النحوي).</td>
+      </tr>
+      <tr>
+        <td><strong>الأساليب اللغوية</strong></td>
+        <td>الطريقة أو المذهب الذي يعبّر به الأديب عن المعاني التي تجول في خاطره.</td>
+      </tr>
+      <tr>
+        <td><strong>المحسنات البديعية</strong></td>
+        <td>معنوية (طباق، مقابلة، تورية، حسن تعليل) / لفظية (جناس، سجع، ردّ الأعجاز على الصدور).</td>
+      </tr>
+      <tr>
+        <td><strong>الموسيقى</strong></td>
+        <td>الإيقاع الداخلي والخارجي؛ الوزن الشعري وعاء المعنى، والقافية أساس التوازن في لغة الشعر.</td>
+      </tr>
+      <tr>
+        <td><strong>وحدة الموضوع</strong></td>
+        <td>القصيدة تدور حول موضوع واحد محدد المحور ← ترتيب الأفكار والصور ← وحدة حية لكل جزء وظيفته.</td>
+      </tr>
+      <tr>
+        <td><strong>وحدة الجو النفسي</strong></td>
+        <td>وحدة الشعور والإحساس يسري في جنبات النص من موقف نفسي واحد يعانيه الأديب.</td>
+      </tr>
+      <tr>
+        <td><strong>البناء</strong></td>
+        <td>النظام الذي سيكون عليه الأثر الأدبي (الشكل الهندسي). يختلف من فن لفن: بناء القصيدة ≠ المقالة ≠ القصة ≠ الرواية.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- تحليل الأبيات 5-10 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📜</span> تحليل الأبيات (5-10) من معلقة زهير</div>
+    <div class="poetry-box">
+      ألا أبلِغِ الأحلافَ عنّي رسالةً *** وذبيانَ هل أقسمتم كلَّ مُقسَم<br>
+      وما الحربُ إلا ما علمتم وذقتُم *** وما هو عنها بالحديث المرجَّم<br>
+      متى تبعثوها ذميمةً وتضرّوها *** وتَضرَم إذا ضرّيتموها فتَضطرم<br>
+      فتعرَّككم عَرَّكَ الرَّحسى بثفالها *** وتلقَّح كِشافًا ثم تُنتَج فتُتئِم<br>
+      فتُنتِج لكم غِلمانًا أشأمَ كلُّهم *** كأحمر عادٍ ثم تُرضع فتَفطِم<br>
+      فتُسغِلْ لكم ما لا تُغَلَّ لأهلها *** قُرى بالعراق من قَفيزٍ ودرهم
+    </div>
+    <p style="font-weight:700; color:var(--primary); margin:12px 0 8px;">معاني الأبيات:</p>
+    <ul class="styled-list">
+      <li><strong>البيت 5:</strong> ينبّه الشاعر طرفي الحرب إلى أهمية الالتزام بهذا الصلح ويحذّرهما من نقضه.</li>
+      <li><strong>البيت 6:</strong> يذكّرهم بأذى الحرب وشرورها — فأنتم عايشتموها حقيقةً لا ظنًا.</li>
+      <li><strong>البيت 7:</strong> تعلمون أن الحرب كلّها شرٌّ وتزداد اشتعالًا فتعود بوجهها القبيح.</li>
+      <li><strong>البيت 8:</strong> ما تفعله الحرب بالناس كما تفعله الرحى بالحبوب وكالناقة الشؤم التي تلد في كل عام.</li>
+      <li><strong>البيت 9:</strong> الأجيال التي تولد في جو الحرب تتعوّد على القتل والثأر كأحمر عاد.</li>
+      <li><strong>البيت 10:</strong> يتابع رسم الصورة المنفّرة: ما يأتيهم من مضار الحرب أكثر مما يناله أهل العراق.</li>
+    </ul>
+    <p style="font-weight:700; color:var(--primary); margin:12px 0 8px;">الأساليب البلاغية:</p>
+    <ul class="styled-list">
+      <li><strong>"ألا":</strong> أداة تنبيه لأمر مهم.</li>
+      <li><strong>"هل أقسمتم":</strong> استفهام خرج عن حقيقته إلى التقرير (أقوى من الإخبار).</li>
+      <li><strong>البيت 6 (أسلوب قصر):</strong> النفي والاستثناء للتأكيد على أن الحرب ليس فيها غير شرورها.</li>
+      <li><strong>البيت 7 (استعارة مكنية):</strong> شبّه الحرب بالنار في سرعة انتشارها.</li>
+      <li><strong>البيت 8:</strong> تشبيه بليغ (الحرب بفعل الرحى) + استعارة مكنية (الحرب كالناقة الشؤم).</li>
+      <li><strong>استعمال العطف:</strong> 10 حروف عطف في الأبيات 7-10 تدل على استمرارية الحرب وتواليها.</li>
+      <li><strong>الكاف في "تعرككم":</strong> قوة الجرس وشدّته يدل على قوة الحرب وشدّتها.</li>
+      <li><strong>الموسيقى والبحر:</strong> بحر الطويل (فعولن مفاعيلن) — أطول بحور الشعر، مناسب لطول الحرب وحركتها واضطرابها.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================================
+     LECTURE 4
+======================================== -->
+<section id="lecture-4" class="lecture-section">
+  <div class="lecture-title-card">
+    <div class="lecture-num">٤</div>
+    <div>
+      <h2>ذئب على مائدة الفرزدق</h2>
+      <p>الشعر الأموي — الفرزدق — تحليل نص شعري وصفي حواري</p>
+    </div>
+  </div>
+
+  <!-- مقدمة -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🏛️</span> مقدمة: السياق الأدبي</div>
+    <ul class="styled-list">
+      <li>نص شعري في العصر الأموي — العصر الذي ازدهر فيه الأدب وحظي الشعراء بمنازل رفيعة عند خلفاء بني أمية.</li>
+      <li>نص وصفي يقوم على التصوير القصصي الحواري — أحد أغراض الشعر العربي المعروفة منذ الجاهلية.</li>
+      <li>الأسلوب القصصي الحواري لم يكن شائعًا في الشعر العربي القديم.</li>
+    </ul>
+  </div>
+
+  <!-- الفرزدق -->
+  <div class="card">
+    <div class="card-title"><span class="icon">👤</span> جو النص: الفرزدق</div>
+    <ul class="styled-list">
+      <li><strong>الاسم الكامل:</strong> همّام بن غالب بن صعصعة التميمي الدارمي، يكنى أبا فراس.</li>
+      <li><strong>لقبه:</strong> الفرزدق — لجهامة وجهه وغلظه. وقيل: لشبه وجهه بالخبزة.</li>
+      <li>كان لا ينشد بين يدي الخلفاء والأمراء إلا قاعدًا.</li>
+      <li>من أهل البصرة، من النبلاء، عظيم الأثر في اللغة.</li>
+      <li>يُشبَه بزهير بن أبي سلمى — كلاهما من شعراء الطبقة الأولى.</li>
+      <li><strong>النقائض:</strong> قصائد هجاء دارت بين الفرزدق وجرير والأخطل — من أشهر ما يُذكر.</li>
+      <li>النقّاد قالوا: "الفرزدق ينحت من صخر وجرير يغرف من بحر" (قوة شعره وجزالة ألفاظه).</li>
+      <li>"لولا الفرزدق لضاع ثلث اللغة."</li>
+      <li>توفي في بادية البصرة وقد قارب المائة عام.</li>
+    </ul>
+  </div>
+
+  <!-- الأبيات 1-5 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📜</span> النص الشعري: الأبيات (1-5)</div>
+    <div class="poetry-box">
+      وأَطلسَ عَسَّالٍ وَمَا كَانَ صَاحِبًا *** دَعَوتُ لِنَارِي مَوهِنًا فَأَتَانِي<br>
+      فَلمَّا أَتَى قُلتُ: ادْنُ دُونَكَ إِنَّنِي *** وإيَّاكَ في زادي لَمُشتَرَكَانِ!<br>
+      فَبِتُّ أَقُدُّ الزَّادَ بَيْنِي وَبَيْنَهُ *** على ضوء نارٍ مَرَّةً وَدُخَانِ<br>
+      فَقُلتُ لَهُ لَمَّا تَكَشَّرَ ضاحِكًا *** وَقَائِمُ سَيفِي مِنْ يَدِي بِمكانِ<br>
+      تَعَشَّ فَإِنْ عَاهَدتَنِي لا تَخُونِنِي *** نَكُنْ مِثلَ مَنْ يا ذِئبُ يَصطَحِبَانِ
+    </div>
+    <p style="font-weight:700; color:var(--primary); margin:12px 0 8px;">معاني الأبيات:</p>
+    <ul class="styled-list">
+      <li><strong>البيت 1:</strong> ذئب أغبر اللون خطير ليس له صاحب، رآني في جوف الليل أوقدت ناري فاعتبر ذلك دعوة فأتاني.</li>
+      <li><strong>البيت 2:</strong> لما رأيته قريبًا دعوته لطعامي وأشركته فيه.</li>
+      <li><strong>البيت 3:</strong> فظللت تلك الليلة أقسّم الزاد بيني وبينه على ضوء النار وعتمة الدخان.</li>
+      <li><strong>البيتان 4 و5:</strong> لما رأيته كشّر عن أنيابه وبدت معالم الغدر، قلت له: أكمل عشاءك فإن لم تخني كنّا صديقين وفيّين.</li>
+    </ul>
+    <p style="font-weight:700; color:var(--primary); margin:12px 0 8px;">البلاغة والأسلوب (1-5):</p>
+    <ul class="styled-list">
+      <li><strong>التشخيص:</strong> خلع الشاعر على الذئب صفات بشرية من بداية القصيدة (يحاوره على أنه عاقل).</li>
+      <li><strong>الكناية:</strong> "ما كان صاحبًا" — كناية عن خطورة الذئب وغدره.</li>
+      <li><strong>"بتُّ أقدّ الزاد"</strong> — كناية عن حسن المعاشرة والاطمئنان لجواره.</li>
+      <li><strong>"قائم سيفي من يدي بمكان"</strong> — كناية عن حذره واستعداده وتيقّظه.</li>
+    </ul>
+  </div>
+
+  <!-- الأبيات 6-8 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📜</span> الأبيات (6-8) ومعانيها</div>
+    <div class="poetry-box">
+      وَأَنتَ امرُؤٌ يا ذِئبُ والغَدرُ كنتما *** أُخيَّيَن كَانَا أُرضِعَا بِلبَانِ!<br>
+      وَلو غَيرُنَا نَبَّهتَ تَلتمسُ القِرَى *** رَمَاكَ بِسَهمٍ أَوشَباةِ سِنَانٍ<br>
+      كُلُّ رَفِيقَيْ كُلِّ رَحْلٍ، وَإِن هُما *** تَعَاطَيا القَنَا قَوماهُما، أَخَوَانِ
+    </div>
+    <ul class="styled-list">
+      <li><strong>البيت 6:</strong> أنت يا ذئب معروف بالغدر، وهذا طبع ملازم لك — كأنك رضعت الغدر من أمك مع الحليب.</li>
+      <li><strong>البيت 7:</strong> لو توجّهت لغيري تطلب الطعام لرماك بسهم أو طعنك برمح حاد.</li>
+      <li><strong>البيت 8:</strong> يذكّر الشاعر بأن كل شخصين تجمعهما الأسفار يصيران كالأخوين حتى وإن نشبت الحروب بين قوميهما.</li>
+    </ul>
+    <p style="font-weight:700; color:var(--primary); margin:12px 0 8px;">البلاغة والأسلوب (6-8):</p>
+    <ul class="styled-list">
+      <li><strong>التشبيه البليغ:</strong> "كنتما أخيّين" — شبّه الذئب والغدر بالأخوين.</li>
+      <li><strong>التصغير في "أخيّين":</strong> دلالتان: أنه رفيق الغدر منذ الصغر، وأن التصغير يفيد التحبب (الغدر محبَّب له).</li>
+      <li><strong>التكرار في "كلّ رفيقي كلّ رحل":</strong> توكيد على مبدأ صحبة الدرب في كل الأحوال.</li>
+      <li><strong>المقارنة والموازنة:</strong> في البيت السابع لإظهار كرمه وشجاعته.</li>
+      <li><strong>الضمير "هما" الزائد:</strong> يُظهر الشاعر تركيزه على صحبة الرفيقين ومعزولَين عن قوميهما.</li>
+    </ul>
+  </div>
+
+  <!-- تعليقات عامة -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🔍</span> تعليقات عامة على النص</div>
+    <ul class="styled-list">
+      <li><strong>أولاً:</strong> الشاعر موفّق في بسط السياق القصصي بإيجاز، فصور البيئة الزمانية (جوف الليل المظلم) والمكانية (المكان البعيد عن الناس).</li>
+      <li><strong>ثانياً:</strong> نجح في التعبير عن شجاعته وكرمه مستثمرًا التشبيه والصور والألفاظ والتراكيب المناسبة.</li>
+      <li><strong>ثالثاً:</strong> تظهر في النص بعض العادات الاجتماعية عند العرب: كثرة الأسفار، إيقاد النيران ليلًا، كرم العربي الذي يقاسم ضيفه دون أن يعرفه.</li>
+      <li><strong>رابعاً:</strong> يبدو أن الفرزدق في هذا النص متأثر بشعر امرئ القيس لما وصف ذئبًا وكلّمه ودعاه إلى الصحبة.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================================
+     LECTURE 5
+======================================== -->
+<section id="lecture-5" class="lecture-section">
+  <div class="lecture-title-card">
+    <div class="lecture-num">٥</div>
+    <div>
+      <h2>مقدمات في تذوق النص الأدبي</h2>
+      <p>التذوق بين المهارة والعلم — عوامل تنمية التذوق — آليات التذوق النقدي</p>
+    </div>
+  </div>
+
+  <!-- أ: بين المهارة والعلم -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🎓</span> أ — التذوق الأدبي بين المهارة والعلم</div>
+    <ul class="styled-list">
+      <li>طبيعة العربي مَيّال إلى الكلمة الجميلة، سريع التأثر بها، مما يجعله أمة بيان بشهادة تاريخه العريق.</li>
+      <li>مهارة التمييز الجمالي تتوفر عند كثيرين، غير أن صقل هذه المهارة اختصاص علمي ينمو بالممارسة والقراءة.</li>
+      <li>ظل تذوّق الشعر يميل بخاصة إلى الأحكام الانطباعية طوال قرون (أشعر بيت، أجمل قصيدة، أفضل شاعر).</li>
+      <li>جاء النقد القديم والحديث ليُرسّخ للتعليل ويُقلّل من هذه العموميات.</li>
+    </ul>
+  </div>
+
+  <!-- ب: عوامل تنمية التذوق -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🌱</span> ب — عوامل تساعد على تنمية التذوق الأدبي</div>
+
+    <p style="font-weight:700; color:var(--primary); margin-bottom:10px;">أولاً: اختيار ما يلائم الحالة الشعورية للمتلقي</p>
+    <ul class="styled-list">
+      <li>المرحلة العمرية مثال واضح: للفتيان نصوص تلائمهم، وللشباب نصوص أكثر مناسبةً، وكبار السن قد تلائمهم مضامين أكثر وقارًا.</li>
+      <li>من المناسب جدًا أن ينتقي المتلقي ما يُعينه على التذوق من خلال مراعاة حالته العمرية أو الشعورية.</li>
+      <li>في تراثنا العربي نماذج تؤكد أن انقطاع التواصل بين المتلقي والنص يولّد فجوة سلبية.<br>
+        <span class="label">مثال</span> الشاعر الذي بدأ مديح أمير متخوّفًا بقوله: "لا تَقُل بُشرى ولكنْ بُشرَيانِ *** غُرَّةُ الدَّاعي ويَومُ المَهرَجانِ" فأغاظ الأمير ولم يُقبل على القصيدة.
+      </li>
+      <li><span class="label">مثال</span> شاعر بدأ مدح أمير وقور بـ "يَا بَلِسِّيَّ البَالِ قَدْ بَلْبَلْتَ بِالبَلْبَالِ بَالِي" فرفضه الأمير.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 10px;">ثانياً: اختيار ما يلائم المستوى الفكري للمتلقي</p>
+    <ul class="styled-list">
+      <li>هناك متلقون يحفلون بالأداء الفني الذي يخدم الرؤية بعمق، وهناك من يُفضّل التناول المباشر.</li>
+      <li>قصائد ابن الرومي تلائم من يحبون اعتصار المعاني، والذين لا يُحبون الاسترسال والتطويل لن يروق لهم شعره.</li>
+      <li>من تستهويهم الحكمة سيُفضّلون شعر المتنبي على البحتري، ومن كان شديد الحس فشعر البحتري يُضالته.</li>
+      <li>مبدأ التذوق الشعري يُتيح للمتلقي أن يقرأ ويسمع من يجد في شعره مبتغاه الذي يلائم معطيات تكوينه ووعيه.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 10px;">ثالثاً: اختيار ما يلائم العصر</p>
+    <ul class="styled-list">
+      <li>بعض الهواة يحاولون تذوّق الشعر فيقعون في انفصام جمالي (انقطاع عن المعاصرة + انغماس في التراث) = ذائقة مُشوَّهة.</li>
+      <li>الأساس في التذوق الجمالي: أن يتربّص المتلقي بالجمال البياني الحقيقي أيًّا كان، ثم يترصّد للجماليات الأدبية التي تشكّلت في زمنه.</li>
+      <li>مثال الشاعر <strong>صفي الدين الحلّي</strong> (القرن الثامن الهجري): كان يدعو المبدعين إلى معايشة الواقع ويسخر من الذين يتخاصمون مع المعاصرة، يقول معالجًا هذا الإشكال:
+        <div class="poetry-box" style="margin-top:12px;">
+          إنّما الحيزبوسُ والـ... والطخا والنُّقاخُ والعَطْلَبيسُ<br>
+          والسَّبنتى والحَفصُ والهِجْـ... ـرِسُ والطِرقَساتُ والعسَطوسُ<br>
+          لُغةٌ تَنفِرُ المَسامِعُ مِنهـ... ـا وقَبيحٌ أن يُذكَرَ النافرُ الوَحشُ<br>
+          أيسَنَّ قَـولِي هَـذا كَثِيـبٌ قَـ... ـديمٌ ومَقَالِـي عَقَنقَلٌ قُـدمُوسُ؟!
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ج: آليات التذوق النقدي -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🔧</span> ج — آليات التذوق النقدي للنص الأدبي</div>
+
+    <p style="font-weight:700; color:var(--primary); margin-bottom:10px;">أولاً — المضمون (الأفكار العامة والأفكار الجزئية)</p>
+    <ul class="styled-list">
+      <li>المضمون: ما اشتمل عليه النص من موضوعات ورؤى.</li>
+      <li><strong>الغرض:</strong> الموضوع الرئيسي للقصيدة الذي تكشف عنه عادةً مناسبة النص. أبرز الأغراض: الغزل، المديح، الرثاء، الهجاء، الوصف.</li>
+      <li><strong>الاتجاه:</strong> رؤية النص العامة. من أبرز الاتجاهات في الشعر الحديث والمعاصر: الوجداني، التأملي، الاجتماعي، السياسي.</li>
+      <li><strong>الأفكار العامة:</strong> الأفكار المحورية التي يدور فيها مضمون النص (قد تكون فكرة واحدة أو أكثر).</li>
+      <li><strong>الأفكار الجزئية:</strong> يمكن تتبّعها من خلال مقاطع القصيدة، ويعالج فيها الشاعر جزئيات محددة.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 10px;">ثانياً — البناء: (العنوان، المطلع، توالد النص، الوحدات الفنية، التعالق النصي، الخاتمة)</p>
+    <ul class="styled-list">
+      <li><strong>العنوان:</strong>
+        <ul class="sub-list">
+          <li>لم تكن عنونة النصوص الشعرية مطلبًا فنيًا ولا مضمونيًا في العصور المتقدمة.</li>
+          <li>حديثًا مع معالم النهضة: أصبحت عنونة الدواوين والنصوص عنصرًا عضويًا بارزًا.</li>
+          <li><strong>أ — العنوان المضمون:</strong> أقرب إلى المباشرة، الأكثر اتصالًا بفحوى النص. مثل: (فلسطين الأبية، أجمل المصايف، وطني، هموم، الكوكب الآفل، كبرياء).</li>
+          <li><strong>ب — عنوان الإبداع:</strong> إطار في عمق عميق يخضع في صياغته للإيحاء والتأويل. مثل: (الينابيع التي غادرت، غناء في حضرة الشمس، حديث القمر، رقصة العاصفة، الموت في الساعة التاسعة، طفل أبابيل).</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="lecture-6" class="lecture-section">
+  <div class="lecture-title-card">
+    <div class="lecture-num">٦</div>
+    <div>
+      <h2>آليات التذوق النقدي للنص الأدبي</h2>
+      <p>تتمة البناء (المطلع، توالد النص، الوحدات الفنية، التناص، الخاتمة) — لغة النص ودلالاتها — مستويات الصورة والإيقاع</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🏛️</span> أولاً: عناصر البناء الفني (تتمة)</div>
+    
+    <p style="font-weight:700; color:var(--primary); margin-bottom:8px;">١. المطلع (الابتداء):</p>
+    <ul class="styled-list">
+      <li><strong>في النقد القديم:</strong> يُعد الواجهة والتصور الأول عن القصيدة، وبه تُستعذب أو تُمج؛ ورأوا أن "الشعر قفل أوله مفتاحه"، وطالبوا بإجادته وإتقانه وأن يأتي مُصرَّعاً، سلس الجرس، خالياً من التعقيد.</li>
+      <li><strong>عند التحديثيين والمجددين:</strong> حوّلوا جماليات المطلع إلى "العنوان"؛ فلا تمهيد في ابتداءاتهم بل يدلفون إلى المضمون مباشرة ويقتحمونه.</li>
+      <li><strong>أساليب المطالع الحديثة:</strong>
+        <ul class="sub-list">
+          <li><span class="label">المطلع التمهيدي:</span> يمهد للمضمون بطرق مختلفة، مثل: <em>"سُحُبٌ تَلُوْحُ وَرَعْدُها يَتَكَلَّمُ.. وَالأَرْضُ تَسْمَعُ مَا يُقَالُ وَتَفْهَمُ"</em>.</li>
+          <li><span class="label">المطلع المباغت:</span> يثب على المضمون مباشرة متخطياً شكليات المبادأة، مثل: <em>"عَلَيْها يا مُقَبِّلَتي - وَعِطْرُها لَمْ يَزَلْ يَجْرِي عَلى شَفَتي"</em>.</li>
+          <li><span class="label">المطلع القصصي:</span> يستفيد من آليات الافتتاح القصصي أو التشويق الخبري، مثل: <em>"في بيتنا القديم / جدي ينام مشرعاً... / يستقبل النسيم"</em>.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">٢. توالد النص (حجم النص):</p>
+    <ul class="styled-list">
+      <li>يراد به حجم النص ومدى استيفائه للأفكار العامة والجزئية، والمزاوجة بين المضمون والتشكيل الفني.</li>
+      <li><strong>قديماً وحديثاً:</strong> كان الطول أو "النفس" مقياساً للجودة ودليلاً على غزارة الطبع وقوة الملكة، ونُعِتَ جيد شعرهم بـ "المطولات"، بينما عُدَّ أصحاب المقطعات من الهواة أو المتطفلين.</li>
+      <li><strong>في المعاصرة الحالية:</strong> لم يعد عامل الطول خاضعاً للسابق، ولا يمنح وسام الطبع؛ وانتشرت قصائد مستقلة ذائعة كالثلاثيات، والرباعيات، والخماسيات، والسداسيات، واستعيض عن التطويل بآليات: التكثيف، واللمح، والإيجاز.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">٣. الوحدات الفنية:</p>
+    <ul class="styled-list">
+      <li><strong>أ — الوحدة الموضوعية:</strong> أن يعالج النص موضوعاً واحداً. لم تكن مطلباً مهماً في الشعر القديم (رأوا في التعدد براعة وتمكناً)، أما حديثاً ومعاصراً فعاب النقاد الجمع بين موضوعات متعددة، واشترطوا معالجة موضوع واحد محدد.</li>
+      <li><strong>ب — الوحدة العضوية:</strong> تلاحم أجزاء النص أسلوبياً ومعنوياً، بحيث يصبح من المخل بالنص تغيير مواقع أجزائه أو الاستغناء عنها، ومستلزماتها ترتيب الصور والأفكار ترتيباً يتقدم به النص شيئاً فشيئاً حتى النهاية.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">٤. التعالق النصي (التناص):</p>
+    <ul class="styled-list">
+      <li>مصطلح نقدي حديث يشير لوجود علاقة تربط بين نص وآخر (جزئية أو كلية، باطنة أو ظاهرة). يدخل فيه السرقات الأدبية، ويتسع ليشمل كل أنواع التأثر بوعي أو بغير وعي، وأدرج فيه المعاصرون: المعارضات، والمناقضات، والاقتباس، والتضمين.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">٥. الخاتمة:</p>
+    <ul class="styled-list">
+      <li>إذا كان المطلع مفتاح النص فالخاتمة قفل عليه، ويجب تساوى عناية الشاعر بهما. اشترط المتقدمون أوصافاً عامة كأن تكون محكمة لا تمكن الزيادة عليها، ولا يأتي بعدها أحسن منها.</li>
+      <li><strong>أبرز أساليب الاختتام المعاصرة:</strong>
+        <ul class="sub-list">
+          <li><span class="label">الخاتمة الآلية:</span> توظف ألفاظاً وتراكيب متداولة لإشعار المتلقي بالنهاية، مثل: <em>"فَلْتَبْقَ يَا وَطَنِي لِلْحُبِّ سُنْبُلَةً *** على تَرَاهَا غَرَسْنَا أَجْمَلَ الصُّوَرِ"</em>.</li>
+          <li><span class="label">الخاتمة الخلاصة:</span> توجز الرؤية الرئيسية وتقفل النص، مثل: <em>"هَذِي الحَيَاةُ صَلاحُهَا بِالْأَمْ... أَوْ فَعَلَيْكُمُ يَا قَوْمُ أَلْفُ سَلامِ"</em>.</li>
+          <li><span class="label">الخاتمة الحكمة:</span> يغلق الشاعر نصه على رؤية تأملية أو تساؤلية، مثل: <em>"لا حَاضِرٌ يَقْوَى بِغَيْرِ جُذُورِهِ *** أَيُشَادُ مِنْ غَيْرِ الْأَسَاسِ بِنَاءُ؟"</em>.</li>
+          <li><span class="label">الخاتمة المفتوحة:</span> لا تظهر معها ملامح واضحة للنهاية، فيظن المتلقي أن للنص بقية (لعجز الشاعر عن القفل، أو لوازع شعوري يوحي باستمرار النص في وعي المتلقي)، مثل: <em>"مَجْرُوْحَةٌ أَحْيَا بِهَمٍّ دَائِمٍ *** لِي خَافِقٌ أَجْبَرْتُهُ أَنْ يَكْتُما"</em>.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">✍️</span> ثانياً: مستويات لغة النص الأدبي</div>
+    <p>تُدرس اللغة من خلال ثلاثة مستويات رئيسية:</p>
+    
+    <p style="font-weight:700; color:var(--primary); margin-bottom:6px;">١. المستوى التركيبي:</p>
+    <ul class="styled-list">
+      <li><strong>النظام النحوي والصرفي:</strong> يتناول سلامة اللغة، وتجريب الإمكانات اللغوية المتاحة الخارجة عن القواعد المقررة.</li>
+      <li><strong>النظام الأسلوبي:</strong> يتناول أساليب النظم (أحوال الفصل والوصل، التقديم والتأخير، الحذف والتكرار، الإطناب والاختزال، ومستويات التقليد والابتكار).</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 6px;">٢. المستوى الدلالي:</p>
+    <p>تحظى الدلالة بعناية فائقة، ولم تعد مقتصرة على مخرجات المعاجم، بل تخطتها لما وراءها. وتنقسم إلى:</p>
+    <ul class="styled-list">
+      <li><strong>الدلالة القريبة:</strong> تفصح عنها المعاجم دون جهد تأويلي ويعيها المتلقي العادي. مثل وصف القدس: <em>"قَدْ خَلَّفُوا القَدْسَ فَوْقَ الوَحْلِ عَارِيَةً *** تُبِيْحُ عِزَّةَ نَهْدَيْهَا لِمَنْ رَغِبا"</em> (يربط العادي بيسر بين وضعها ووضع امرأة ممتهنة).</li>
+      <li><strong>الدلالة العميقة:</strong> ترتكز على الترميز ويعيها المتلقي المتوسط. مثل: <em>"يَا مَنْ تُحَدَّيْتُ فِي حُبِّ لَهُ مُدُناً *** بِحَالِها، وَسَأَمْضِي فِي تَحَدِّيْها"</em> (المدن بالمعاجم دور ونشاط، لكن الشاعر يلمح لتحدي أعراف المدن المتفتحة والقرية المتشددة).</li>
+      <li><strong>الدلالة الغامضة:</strong> تترك مفتوحة قابلة لأكثر من تأويل ولا يقترب منها إلا المتلقي المميز. مثل: <em>"رَحَلْتِ وَالحُزْنُ في عَيْنَيَّ خَارِطَةٌ *** لَمْحَتُ فِيْهَا خُطُوطَ الوَهْمِ خَطَّيْنِ"</em> (الخطين هما دموع عينيه التي تؤطر حدود العالم بعد رحيلها). يلاحظ أن بعض الغموض ينشأ اعتباطاً وعبثاً رغبة في التمويه.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 6px;">٣. المستوى الصوتي:</p>
+    <p>أبرز ما يتناول فيه:</p>
+    <ul class="styled-list">
+      <li>المحسنات البديعية ذات الأثر الصوتي (فن التجنيس، الترصيع، التقسيم، رد العجز على الصدر).</li>
+      <li>توالي حروف اللين بشكل ملحوظ (الألف والواو والياء في وضع السكون).</li>
+      <li>حضور بعض الحروف الملحوظ كحروف الصفير أو الهمس، وتكرار المفردات والجمل.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">👁️</span> ثالثاً: الصورة والأسلوب الإيقاعي</div>
+    
+    <p style="font-weight:700; color:var(--primary); margin-bottom:8px;">١. الصورة الشعرية:</p>
+    <ul class="styled-list">
+      <li><strong>الصورة المفردة:</strong> تكتسب مقوماتها البيانية بشكل منفرد (التشبيهية والاستعارية)، وتتسم بوضوح أجزائها واعتدال دلالتها ووفرتها.</li>
+      <li><strong>الصورة المركبة:</strong> تتوالد في مقطع شعري من خلال مشهد جزئي متكامل، وتتضافر فيها التشبيهات والاستعارات، وتمتاز بالتوالي الحركي المتتابع كأنه مشهد مرئي قصير.</li>
+      <li><span class="label accent">مثال من قصيدة "عبث النهايات"</span>: 
+        <div class="poetry-box">
+          هُنَالِكَ حَيْثُ انْتَزَعْنَا اليَدَيْنْ *** وَفَاضَتْ لَنَا بِالنِّهَايَاتِ عَيْنٌ<br>
+          وَقَفْنَا نُصَعِدُ أَنْفَاسَنَا *** وُكُنَّا نُحَدِّقُ فِي الْمُقْلَتَيْنْ<br>
+          كِلانَا يُقَلِّبُ صَفْحَاتِهِ *** وَمَا إِنْ وَجَدْنَا سِوَى صَفْحَتَيْنْ<br>
+          وَشَيْئاً فَشَيْئاً تَغِيمُ الرُّؤى *** وَيَلْفِظُنَا الصَّمْتُ فِي مَسْلَكَيْنَ<br>
+          وَتُبْعِدُ عَنْ مَوْضِعِي خُطوةً *** وَأَبْعِدُ عَنْهَا أَنَا خُطُوَتَيْنْ<br>
+          وَمَا سَأَلَتْنِي عَنْ وُجْهَتِي *** وَلا أَنَا إِذْ أَبْعَدَتْ قُلْتُ: أَيْنْ؟<br>
+          وَلَكِنَّنَا حِيْنَ ضَاقَ المَدَى *** رَجَعْنَا إِلَى بَعْضِنَا مُسْرِعَيْنٌ 
+        </div>
+      </li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 8px;">٢. الإيقاع:</p>
+    <ul class="styled-list">
+      <li><strong>الوزن:</strong> تحديد وزن القصيدة ومدى التزام الشاعر بضوابط البحر. محاولة بعض النقاد اعتساف روابط نفسية وشعورية بين المضمون ونوع البحر لا تصح؛ لوجود نصوص مختلفة وممتناقضة المضامين على بحر واحد، والأجدى تحديد البحور بحسب كثرة وقوة استعمالها.</li>
+      <li><strong>القافية:</strong> تتناول تحديد قافية القصيدة وحروفها وحركاتها وضوابطها، وما قيل عن اعتساف الملاءمة بين الأوزان والمضامين ينطبق على القوافي أيضاً.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="lecture-7" class="lecture-section">
+  <div class="lecture-title-card">
+    <div class="lecture-num">٧</div>
+    <div>
+      <h2>الأدب وعلاقته بالفنون الأخرى: الأدب والموسيقا</h2>
+      <p>المقارنة بين النقد الإبداعي والابتداعي — الفروق الجوهرية بين الموسيقا الصافية والأدبية — ألوان النغم البديعي والإيقاعي</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🎵</span> أولاً: الأدب وعلاقته بالفنون والموسيقا</div>
+    <ul class="styled-list">
+      <li><strong>اتجاهات النقد الحديث:</strong> ربط النقد في مرحلته الإبداعية بين الشعر والرسم معلياً العنصر التصويري، بينما جنح في المرحلة الابتداعية التالية إلى التركيز على المشابهة بين الشعر والموسيقا. وفي كلا الموقفين مغالاة؛ فالشعر ليس موسيقا فقط بل موسيقا وتصوير وأشياء أخرى تعم سائر فنون الأدب (وهي بالنثر قد تعرى عن بعض هذه العناصر بخلاف الشعر).</li>
+      <li><strong>تعريف الموسيقا:</strong> إيقاع منتظم بالألحان المعزوفة والأدب معاً.</li>
+    </ul>
+
+    <table class="styled-table" style="margin-top:14px;">
+      <tr><th>وجه المقارنة</th><th>الموسيقا الصافية (المعزوفة)</th><th>موسيقا الأدب</th></tr>
+      <tr><td>مصدر الصوت</td><td>آلات النفخ والدق والاحتكاك (ناي، دف، بيان، عود) .</td><td>نطق الفم البشري لحروف الألفباء.</td></tr>
+      <tr><td>الارتباط بالمعنى</td><td>أصوات خالية من المعاني .</td><td>مرتبطة بالكلمات ومعانيها لا تنفصل عنها.</td></tr>
+      <tr><td>طبيعة التأثير</td><td>تؤثر فينا بنفسها تأثيراً مباشراً.</td><td>لا تؤثر منفصلة؛ بل تصاحب الكلمات وتفتح مغاليق النفس لمعاني العبارات.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🎼</span> ثانياً: الصور الإيقاعية والموسيقية في الأدب</div>
+    
+    <p style="font-weight:700; color:var(--primary); margin-bottom:6px;">١. السجع المرصع:</p>
+    <ul class="styled-list">
+      <li>هو تساوى فقرتين أو أكثر في الوزن والتقفية. يكثر بالنثر وينفر بطبيعته من القيود إلا إذا تكلف الناثر.</li>
+      <li><span class="label">مثال نثري (الحريري)</span>: <em>"فهو يطبع الأسجاع بجواهر لفظه، ويقرع الأسماع بزواجر وعظه"</em> (توازن وتناظر تام).</li>
+      <li><span class="label">مثال شعري (امرؤ القيس)</span>: <em>"الماء منهمرٌ، والشدُّ منحدرٌ = والقصب مضطمرٌ، والمتن ملحوبُ"</em> (سجع مرصع بالجمل الثلاث الأولى كأنه وزن وتقفية إضافية).</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 6px;">٢. التصريع والتسميط:</p>
+    <ul class="styled-list">
+      <li><strong>التصريع:</strong> وجود قافية أخرى غير الأصلية تتكرر قبل انتهاء الشطرات الثواني (تكرر أفقي)، كقول الشاعر:
+        <div class="poetry-box">
+          يا خاطب الدنيا الدنية، إنها = شَرَك الردى، وقرارة الأكدار<br>
+          دار متى ما أضحكت في يومها = أبكت غداً، بُعداً لها من دار<br>
+          غاراتها لا تنقضي، وأسيرها = لا يفتدى بجلائل الأخطار 
+        </div>
+      </li>
+      <li><strong>التسميط:</strong> تكرار القافية عدة مرات في البيت الواحد (وضع رأسي)، ومثاله:
+        <div class="poetry-box">
+          هم القوم: إن قالوا أصابوا، وإن دُعُوا = أجابوا، وإن أعطوا أطابوا وأجزلوا 
+        </div>
+        أو قول الآخر:
+        <div class="poetry-box">
+          وحرب وردت، وثغر سددت = وعِلْج شددت عليه الحبالا<br>
+          ومال حويت، وخيل حميت = وضيف قَرَيْتَ يخاف الوكالا 
+        </div>
+      </li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 6px;">٣. التجنيس (الجناس):</p>
+    <ul class="styled-list">
+      <li><strong>الجناس التام:</strong> قمة النغمية؛ اتفاق الكلمتين نطقاً واختلافهما معنى، مما يحدث مفاجأة مدهشة ومنعشة.
+        <br>• <span class="label">مثال ١</span>: <em>"حَدَقَ الآجالِ آجالُ = والهوى للمرء قتال"</em> (آجال الأولى جمع "إجل" وهو الظباء وشبه بها النساء، وآجال الثانية جمع "أجل" وهو الموت).
+        <br>• <span class="label">مثال ٢ (أبو تمام)</span>: <em>"ما مات من كرم الزمان فإنه = يحيا لدى يحيى بن عبد الله"</em>.
+        <br>• <span class="label">مثال ٣ (جناس التراكيب)</span>: <em>"فلم تضع الأعادي قدر شاني *** قالوا: فلان قد رشاني"</em> (انتقال الراء من آخر كلمة قدر إلى أول شاني غير التركيب تماماً).
+      </li>
+      <li><strong>الجناس المذيل:</strong> أقل موسيقية لكن لا يخلو من دهشة، مثل: (الجوى والجوانح) في قول الخنساء: <em>"إن البكاء هو الشفاء من الجوى بين الجوانح"</em> ، وقول أبي تمام: <em>"يمددن من أيد عواص عواصم = تصول بأسياف قواض قواضب"</em>.</li>
+      <li><strong>الجناس المتعاقب:</strong> أجمل صور الجناس تنغيماً لتعاقب الكلمتين، كقوله تعالى: <em>{وَجِئْتُكَ مِنْ سَبَا بِنَبَإٍ يَقِينٍ}</em> ، وقوله: <em>{وَيْلٌ لِكُلِّ هُمَزَةٍ لُمَزَةٍ}</em>.</li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 6px;">٤. رد الأعجاز على الصدور والموازنة:</p>
+    <ul class="styled-list">
+      <li><strong>رد الأعجاز على الصدور:</strong> تكرير الكلمة بنصها أو ما يقرب منها في أول الكلام وآخره كالصَدفتين المتناظرتين. كقوله تعالى: <em>{قَالَ إِنِّي لِعَمَلِكُمْ مِنَ الْقَالِينَ}</em>، وقولهم: <em>"سائل اللئيم يرجع ودمه سائل"</em>.</li>
+      <li><strong>الموازنة:</strong> التناظر الموسيقي الواضح بين جملتين. 
+        <br>• في القرآن الكريم: <em>{وَآتَيْنَاهُمَا الْكِتابَ الْمُسْتَبِينَ * وَهَدَيْنَاهُمَا الصِّرَاطَ الْمُسْتَقِيمَ}</em>.
+        <br>• عند عمرو بن كلثوم: <em>"بأنا المطعمون إذا قدرنا = وأنا المهلكون إذا ابتلينا / وأنا التاركون إذا سخطنا = وأنا الآخذون إذا رضينا..."</em>.
+        <br>• عند أبي تمام: <em>"فأحجم لما لم يجد فيك مطمعاً = وأقدم لما لم يجد عنك مهرباً"</em> (كل كلمة متوازنة مع نظيرتها بالترتيب).
+        <br>• عند المتنبي: <em>"أزورهم وسواد الليل يشفع لي = وأنثني وبياض الصبح يُغري بي"</em>.
+      </li>
+    </ul>
+
+    <p style="font-weight:700; color:var(--primary); margin:16px 0 6px;">٥. التكرار الصوتي والمساوقة الحرفية:</p>
+    <ul class="styled-list">
+      <li><strong>تكرار الكلمة/العبارة:</strong> كالصوت وأصداؤه يؤكد المعنى وتطرب له الأذن. كالتكرار في الآية: <em>{..بالكتاب لتحسبوه من الكتاب وما هو من الكتاب ويقولون هو من عند الله وما هو من عند الله..}</em> ، وفي مقال زكي مبارك عن "أيام طه حسين" ، وتكرار ربيعة الرقي لاسم حبيبته "داح" كدرويش متراقص من الوجد: <em>"صاح، إني غير صاح / أبداً من حب داح..."</em>. وتكرار الآيات بأكملها في سور (الشعراء، الصافات، القمر، الرحمن، المرسلات) ويسمى غربياً بـ "القرار" لشدة التذكير.</li>
+      <li><strong>المساوقة الحرفية (الإيحاء الصوتي):</strong> مساوقة الحروف للمشاعر. كلمح د. محمد النويهي لدور حرفي (السين والفاء الساكنتين) في وصف تأبط شراً لسرعة ركض ابن عمه بالإيحاء بعصف الريح واحتكاك الجسم بالهواء: <em>"ويسبق وفد الريح من حيث ينتحي..."</em>. وكصيغة "افتعل" في <em>{وَهُمْ يَصْطَرِخُونَ فِيهَا}</em> وثقل جاور الصاد والطاء للإيحاء بفظاعة الألم.</li>
+    </ul>
+    <div class="highlight-box">
+      خلاصة: للموسيقا تأثير ضخم يفتح أبواب العقول والقلوب؛ والترجمة النثرية للشعر تفقد علوقها بالنفس مقارنة بالترجمة الشعرية؛ والموسيقا قيد على المبدع لكنه قيد يستخرج قواه العبقرية لتتوقد وتصبح لهيباً يتلظى!
+    </div>
+  </div>
+</section>
+
+<section id="lecture-8" class="lecture-section">
+  <div class="lecture-title-card">
+    <div class="lecture-num">٨</div>
+    <div>
+      <h2>الأدب والتصوير والنحت</h2>
+      <p>أوجه تفوق القلم على الريشة والسينما — مساحة الخصوصية الإدراكية للخيال — تجسيد النحت اللفظي في الشعر والنثر</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🖼️</span> أولاً: الأدب ومنافسته لفني التصوير (الريشة) والسينما</div>
+    <p>إمكانات الأدب في مضمار التصوير أكبر وأثرى من إمكانات الريشة والسينما لأسباب جوهرية عديدة:</p>
+    <ul class="styled-list">
+      <li><strong>الزمن والحركة:</strong> الرسم فن مكاني ينقل لقطة واحدة ساكنة، أما الأدب فـ "فن زماني" يصور الأحداث المتتالية مهما استغرقت من زمن، مع قدرته على حصرها بلقطة واحدة إن أراد.</li>
+      <li><strong>الألوان والحواس الممتدة:</strong> قد يُحرم الرسم من الألوان (كالفحم والرصاص)، بينما الأدب يعتمد على الخيال فينقل المشهد بألوانه الطبيعية ، بل ويمضي لنقل الأصوات، والروائح، والملموسات التي تعجز عنها الريشة والسينما.</li>
+      <li><strong>التغلغل في الضمير والزمن:</strong> يستطيع الأديب التغلغل لأطواء الضمير لمعرفة أفكار العقول ومشاعر القلوب (رضا، حرج، حيرة، ندم)، والاطلاع على النوايا المستقبلية أو استعادة ذكريات الماضي مع مرونة الترتيب الزمني صعوداً وهبوطاً، وهي طلاقة لا تملكها السينما.</li>
+      <li><strong>التعريف والتشويق وتعدد الأعين:</strong> يعجز الرسم عن ذكر الاسم أو الجنسية للشخص والمنزل بخلاف الأدب. والتصوير الأدبي يتم شيئاً فشيئاً فيثير لذة التشويق، أما لوحة الريشة تُرى في لمحة واحدة فتنعدم فيها هذه اللذة. كما يقدم الأدب المشهد بأكثر من عين (كما بالقصص بعين شخصيات متعددة)، ويتقبل المبالغات والتهكم التي تقف اللوحة أمامها متبلدة عاجزة (كمبالغة بشار بن برد: <em>"إذا ما غضبنا غضبة مضرية.. هتكنا حجاب الشمس أو قطرت دما"</em>، ومبالغة عمرو بن كلثوم في طحن الأعداء برحى ثفالها شرقي نجد، وتهكم لاشين بأحد أبطاله أنه <em>"لم يمت تمام الموت"</em>).</li>
+      <li><strong>حرية الخيال والخصوصية:</strong> السينما والتصوير يعطيانك المشهد واللون جاهزاً فيقيدان عينيك وبصرك ، أما الأدب فيقدم الخطوط العامة ويترك لخيال القارئ مساحة الخصوصية لتصور التفاصيل والأصوات والمشمومات بطريقته الخاصة مرتكناً على خبراته الماضية وإمكاناته الإدراكية.</li>
+      <li><strong>التصوير المزدوج (الاعتبارين):</strong> لا يكتفي الأدب بتصوير الشيء في ذاته بل يشبهه بغيره ويستعير له سمات أشياء أخرى، فيقدم الشيء باعتبارين في وقت واحد (طبيعي وكاريكاتوري)، وهو ما لا يستطيعه الفنانان المنافسان.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📜</span> ثانياً: شواهد التذوق الأدبي في التصوير (معلقة عنترة)</div>
+    <p>تتضمن أبيات معلقة عنترة بن شداد خطوطاً وألواناً وحركات وأصواتاً وتدسساً لمواطن الضمير في الإنسان والحيوان تعجز اللوحة والسينما عن مجاراتها:</p>
+    <div class="poetry-box">
+      هل غادر الشعراء من مُتَرَدَّمٍ؟ = أم هل عرفت الدار بعد توهم؟ <br>
+      يا دار عبلة بالجواء تكلمي = وعمي صباحاً دار عبلة واسلمي<br>
+      وتَحُلُّ عبلة بالجواء، وأهلُها = بالحَزْن فَالصِّمَّان فالمُتَتَلَّمِ<br>
+      وكأنَّ فارة تاجر بقسيمَةٍ = سَبَقَتْ عوارضها إليك من الفم<br>
+      أو رؤضَةً أُنُفًا تُضمَّن نبتها = غيثُ قليلُ الدِّمْنِ ليس بِمَعْلَم<br>
+      جادت عليه كل عين ثرَّةٍ = فترَكْنَ كلَّ قرارة كالدرهم<br>
+      سَرًّا وتَسْكابًا، فكُلَّ عشيَّةٍ = يجري عليها الماء لم يتصَرَّمِ <br>
+      وخلا الذباب بها فليس ببارح = غَرِدًا كفعل الشارب المترنّم<br>
+      ولقد شربت من المدامة بعدما = ركد الهواجر بالمشوف المعلم<br>
+      بزجاجة صفراء ذات أَسِرَّةٍ = قُرِنَتْ بأزهَرَ فِي الشَّمَالِ مُقَدَّم<br>
+      لما رأيتُ القوم أقبل جمعهم = يتذامرون كَرَرْتُ غير مذمم<br>
+      يدعون عنتر، والرماح كأنها = أشطان بئر في لبان الأدهم<br>
+      ما زلتُ أرميهم بثغرة نحره = ولبَائِهِ حتى تسربل بالدم<br>
+      فازوَرَّ مِن وَقْع القَنَا بلبانه = وشكا إليَّ بعبرة وتحمحُمِ<br>
+      لو كان يدري ما المحاورة اشتكى = ولكان، لو عَلِمَ الكلام، مُكلِّمي 
+    </div>
+    <p style="font-weight:700; color:var(--primary); margin-top:12px;">مواطن الجمال التصويري المعجز في الأبيات:</p>
+    <ul class="styled-list">
+      <li><strong>عجز اللوحة والسينما:</strong> التساؤل الذهني الداخلي للشاعر في البداية، والإشارة لنيته التلبث عند الأطلال، وتمني الخير والسلامة للدار؛ أسماء الأماكن الجغرافية الدقيقة (الجواء، الحزن، الصمان) تعجز اللوحة عنها إلا بلوحات مكتوبة.</li>
+      <li><strong>تصوير الحواس والروائح:</strong> عطر فم الحبيبة المشبه بنشر الروضة الممطرة، وهزج وترنم الذباب، وحمحمة الفرس وعبرته الشاكية، وتذوق المدامة بالزجاجة الصفراء.</li>
+      <li><strong>الحركة السينمائية المتفوقة:</strong> حركة انتقال الحبيبة وقومها، تهطال المطر، حركة الذباب يحك ذراعه بذراعه، حركة ازورار الحصان الأدهم عن طعنات الرماح التي كأنها حبال بئر طويل وتدفق دمائه كأنه يرتدي سربالاً.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🗿</span> ثالثاً: العلاقة بين الأدب والنحت (الشعري والنثري)</div>
+    <ul class="styled-list">
+      <li><strong>قوة الكلمة المجسمة:</strong> الكلمات قادرة كالنحت على وصف الأشياء ذات الحجوم وصفاً مجسماً، وتزيد عليه بالحركة والصوت والرائحة والتقاط دبيب المشاعر والنيات.</li>
+      <li><strong>المدرسة البرناسية الفرنسية:</strong> مدرسة ظهرت في النصف الثاني من القرن 19 دعت الشاعر ليكون نحاتاً صنائعياً يلتزم بالموضوعية التامة ويلغي شخصيته ليبرز الأوصاف الخارجية للشيء كأنه تمثال منحوت.</li>
+      <li><strong>النحت في الشعر القديم:</strong> عكف الشعراء على وصف الناقة أو الفرس عضواً عضواً بتدقيق، وفي الغزل نحتوا المرأة بوصف شعرها، عينيها، وجنتيها، عنقها، صدرها، خصرها، وساقيها.
+        <br>• <span class="label">تطبيق امرؤ القيس</span>: ينحت تمثالأً لمحبوبته واصفاً بشرتها المصقولة كمرآة، وعينيها كوحش وجرة، وجيدها كجيد الرئم، وشعرها الفاحم الغزير، وصدرها وخصرها وأصابعها.
+        <div class="poetry-box">
+          وبيضة خدر لا يُرام خباؤها = تمتَّعتُ مِن لهو بها غيرَ مُعَجَلٍ<br>
+          مهفهفة بيضاء غير مُفاضةٍ = ترائبها مصقولة كالسجنجل<br>
+          تصدُّ وتبدي عن أسيل وتتقي = بناظرةٍ من وحش وَجْرةً مُطفل<br>
+          وجيد كجيد الرّئم ليس بفاحش = إذا هي نصته ولا بمعطل<br>
+          وفرع يَزينُ المتن أسود فاحم = أثيث كَقِنُو النَّخلة المُتعَثْكِل<br>
+          غدائره مستشزرات إلى العلا = تَضِلُّ العِقاص في مُثَنَّى وَمُرْسَلِ 
+        </div>
+        • <span class="label">تطبيق ديك الجن</span>: يصف الديك بدقة مجسمة مرئية ومسموعة في بكرة الصباح وقد أوفى على مكان مرتفع (الشعف) مرجعاً صوته بطرب وصفاء، واصفاً عرفه كدرة التاج ومذبحه المشنف بالعقيق الأحمر.
+        <div class="poetry-box">
+          أما ترى راهب الأسحار قد هتَفا = وحثَّ تغريده لما علا الشَّعَفا؟ <br>
+          أوفى بصِبْغ أبي قابوس مَفْرَقُهُ = كدُرَّة التاج لمَّا أَن عُولِيَتْ شَرَفًا<br>
+          مشنفا بعقيق فوق مذبحه = هل كنت في غير أذن تعرف الشنفا؟ <br>
+          هز اللواء على ما كان من سِنَةٍ = فارتَج ثم علا، واهتز ثم هفا<br>
+          ثم استمر كما غنى على طرب = مُرنَّحُ قد علا تطريبه وصَفَا 
+        </div>
+      </li>
+      <li><strong>النحت في الأدب النثري:</strong> تتجلى براعة تدقيق الوصف وتفصيله حتى لكأنك تلمس الشيء بيدك.
+        <br>• <span class="label">تطبيق د. محمد حسين هيكل في وصف باطن الكعبة (من كتاب منزل الوحي 1952م)</span>: يصف البهو الرفيع الخالي، وسقفها المعتمد على ثلاثة عمد خشبية ضاربة للحمرة والصفرة وضعها ابن الزبير وتآكل أسفلها بعد قرون فشدت بدوائر خشبية تعلو 3 أذرع، وأرضها الرخامية البيضاء المتينة، وجدرانها المحاطة برخام مزركش وستار الحرير الذي أحالته السنون من الوردي إلى الرمادي المخضر المطرز بعبارات (سبحان الله وبحمده سبحان الله العظيم).
+      </li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<script>
+  function showLecture(num, btn) {
+    // Hide all
+    document.querySelectorAll('.lecture-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    // Show selected
+    document.getElementById('lecture-' + num).classList.add('active');
+    btn.classList.add('active');
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
